@@ -2,92 +2,133 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-body {
-  font-family: Arial, Helvetica, sans-serif;
+body {font-family: Arial, Helvetica, sans-serif;}
+
+#myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.navbar {
-  overflow: hidden;
-  background-color: #333;
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
 }
 
-.navbar a {
-  float: left;
-  font-size: 16px;
-  color: white;
+/* Modal Content (image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
   text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
 }
 
-.dropdown {
-  float: left;
-  overflow: hidden;
+/* Add Animation */
+.modal-content, #caption {  
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
 }
 
-.dropdown .dropbtn {
-  font-size: 16px;  
-  border: none;
-  outline: none;
-  color: white;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit;
-  margin: 0;
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
 }
 
-.navbar a:hover, .dropdown:hover .dropbtn {
-  background-color: red;
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
 }
 
-.dropdown-content {
-  display: none;
+/* The Close Button */
+.close {
   position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
 }
 
-.dropdown-content a {
-  float: none;
-  color: black;
-  padding: 12px 16px;
+.close:hover,
+.close:focus {
+  color: #bbb;
   text-decoration: none;
-  display: block;
-  text-align: left;
+  cursor: pointer;
 }
 
-.dropdown-content a:hover {
-  background-color: #ddd;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
 }
 </style>
 </head>
-<body style="background-color:white;">
+<body>
 
-<div class="navbar">
-  <a href="#home">Home</a>
-  <a href="#news">News</a>
-  <div class="dropdown">
-    <button class="dropbtn">Dropdown 
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <a href="#">Link 1</a>
-      <a href="#">Link 2</a>
-      <a href="#">Link 3</a>
-    </div>
-  </div> 
+<h2>Image Modal</h2>
+<p>In this example, we use CSS to create a modal (dialog box) that is hidden by default.</p>
+<p>We use JavaScript to trigger the modal and to display the current image inside the modal when it is clicked on. Also note that we use the value from the image's "alt" attribute as an image caption text inside the modal.</p>
+
+<img id="myImg" src="https://cdn.discordapp.com/attachments/928388003867541534/1163877861560696924/High-Octane-logo-WHT-2-Slogan-600x497.png?ex=65412cba&is=652eb7ba&hm=5a6fbc9c872a1c17e0eb35d54557b912859d74c85f8b08470468af57b7136170&" alt="Snow" style="width:100%;max-width:300px">
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="img01">
+  <div id="caption"></div>
 </div>
 
-<h3>Dropdown Menu inside a Navigation Bar</h3>
-<p>Hover over the "Dropdown" link to see the dropdown menu.</p>
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById("myImg");
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+img.onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = this.src;
+  captionText.innerHTML = this.alt;
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() { 
+  modal.style.display = "none";
+}
+</script>
 
 </body>
 </html>
